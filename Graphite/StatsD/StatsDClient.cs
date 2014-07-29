@@ -124,6 +124,29 @@ namespace Graphite.StatsD
             }
         }
 
+
+        /// <summary>
+        /// sets the gauge value
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value">must be positive</param>
+        public bool GaugeSet(string key, int value)
+        {
+            var stat = string.Format("{0}:{1}|g", key, value);
+            return Send(stat);
+        }
+
+        /// <summary>
+        /// increments the gauge value (use - to decrement)
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public bool GaugeIncrement(string key, int value)
+        {
+            var stat = string.Format("{0}:{1}{2}|g", key, value > 0 ? '+' : '-', value);
+            return Send(stat);
+        }
+
         #region IDisposable
 
         public void Dispose()
