@@ -143,7 +143,7 @@ namespace Graphite.StatsD
         /// <param name="value"></param>
         public bool GaugeIncrement(string key, int value)
         {
-            var stat = string.Format("{0}:{1}{2}|g", key, value > 0 ? '+' : '-', value);
+            var stat = string.Format("{0}:{1}{2}|g", key, value > 0 ? '+' : '-', Math.Abs(value));
             return Send(stat);
         }
 
